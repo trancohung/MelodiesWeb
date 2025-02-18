@@ -27,29 +27,23 @@ const iconMap = {
     LogoutOutlined: LogoutOutlined
 };
 
-const MenuCard = ({name}) => {
-    console.log(name);
+const MenuCard = ({menu, menuData}) => {
+    // console.log(menuData);
+    const groupedMenuData = menuData.filter(item => item.menuId === menu.menuId);
     return (
         <>
             <div className="m-2 p-2">
-                <h1 className="text-xl text-[#EE10B0]">{name.menuName}</h1>
-                <div className="text-2xl font-bold">
-                    <div className="flex gap-4">
-                        <div>Icon</div>
-                        <h2>Home</h2>
-                    </div>
-                    <div className="flex gap-4">
-                        <div>Icon</div>
-                        <h2>Discover</h2>
-                    </div>
-                    <div className="flex gap-4">
-                        <div>Icon</div>
-                        <h2>Albums</h2>
-                    </div>
-                    <div className="flex gap-4">
-                        <div>Icon</div>
-                        <h2>Artist</h2>
-                    </div>
+                <h1 className="text-xl text-[#EE10B0]">{menu.menuName}</h1>
+                <div className="text-2xl font-bold pt-2">
+                    {groupedMenuData.map((item) => {
+                        const IconComponent = iconMap[item.icon];
+                        return (
+                            <div key={item.menuDataId} className="flex gap-4 items-center">
+                                <div>{IconComponent && <IconComponent />}</div>
+                                <h2 className="text-xl">{item.menuName}</h2>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </>
