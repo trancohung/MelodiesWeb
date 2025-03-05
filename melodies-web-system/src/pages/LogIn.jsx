@@ -34,7 +34,15 @@ const Login = () => {
                     <Input
                         placeholder="Username"
                         size="large"
-                        className='!bg-[#612C4F] !p-4 !text-white !border-none !placeholder-[#FFFFFF99]'
+                        style={{
+                            backgroundColor: '#612C4F',
+                            padding: '1rem',
+                            color: '#FFFFFF',
+                            border: 'none',
+                            borderRadius: '10px',
+                            outline: 'none',
+                        }}
+                        className='!placeholder-[#FFFFFF99]'
                     />
                 </Form.Item>
 
@@ -45,16 +53,37 @@ const Login = () => {
                     <Input.Password
                         placeholder="Password"
                         size="large"
-                        className="!bg-[#612C4F] !p-4 !text-white !border-none [&>input]:!placeholder-[#FFFFFF99]"
+                        style={{
+                            backgroundColor: '#612C4F',
+                            padding: '1rem',
+                            color: '#FFFFFF',
+                            border: 'none',
+                            borderRadius: '10px',
+                            outline: 'none',
+                        }}
+                        className="[&>input::placeholder]:!text-[#FFFFFF99] [&_.anticon]:!text-[#FFFFFF] [&_.anticon:hover]:!text-[#EE10B0]"
                     />
                 </Form.Item>
 
                 <Form.Item>
                     <Flex justify="space-between" align="center" className='mb-4'>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox className='!text-white'>Remember me</Checkbox>
+                            <Checkbox
+                                style={{
+                                    color: '#FFFFFF99',
+                                }}
+                                className='[&_.ant-checkbox-checked_.ant-checkbox-inner]:!bg-[#EE10B0] 
+                                        [&_.ant-checkbox-checked_.ant-checkbox-inner]:!border-[#EE10B0]
+                                        hover:[&_.ant-checkbox-inner]:!border-[#EE10B0]'
+                            >
+                                Remember me
+                            </Checkbox>
                         </Form.Item>
-                        <a href="#" className=''>Forgot password?</a>
+                        <a href="#"
+                            style={{
+                                color: '#FFFFFF99'
+                            }}
+                            className='hover:!text-[#EE10B0]'>Forgot password?</a>
                     </Flex>
                 </Form.Item>
 
@@ -64,12 +93,22 @@ const Login = () => {
                         type="primary"
                         htmlType="submit"
                         size="large"
-                        className='!bg-[#EE10B0] hover:!bg-[#C00E90] !font-bold !p-6 !text-lg'
+                        style={{
+                            backgroundColor: '#EE10B0',
+                            border: 'none',
+                            outline: 'none',
+                            padding: '2rem'
+                        }}
+                        className='hover:!bg-[#C00E90]'
                     >
                         Log in
                     </Button>
                     <p className='text-center text-white mt-4'>
-                        or <a href="#" className='text-[#EE10B0] hover:underline'>Register now!</a>
+                        or <a href="#"
+                         style={{
+                            color: '#EE10B0'
+                         }}
+                         className='hover:!underline'>Register now!</a>
                     </p>
                 </Form.Item>
             </Form>

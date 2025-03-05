@@ -1,5 +1,6 @@
 import { SearchOutlined } from "@ant-design/icons"
 import { Input } from "antd";
+import { Link } from "react-router";
 
 const Header = () => {
     return (
@@ -11,6 +12,7 @@ const Header = () => {
                     style={{
                         backgroundColor: 'lightgray',
                         padding: '10px',
+                        width: '400px',
                         borderRadius: '5px',
                         outline: 'none',
                         boxShadow: 'none',
@@ -31,12 +33,12 @@ const Header = () => {
                 </div>
             </div>
             <div className="flex gap-4">
-                <div className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer">
+                <Link to={'/login'} className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer">
                     <button className="cursor-pointer">Log In</button>
-                </div>
-                <div className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer">
+                </Link>
+                <Link to={'/signup'} className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer">
                     <button className="cursor-pointer">Sign Up</button>
-                </div>
+                </Link>
             </div>
         </div>
     );
