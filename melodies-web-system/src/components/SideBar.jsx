@@ -29,12 +29,12 @@ const iconMap = {
   LogoutOutlined: LogoutOutlined
 };
 
-const Menu = () => {
+const SideBar = () => {
   return (
     <>
-      <div className='bg-[#0E1920] text-white p-10 flex flex-col justify-between items-start w-84 min-h-screen'>
-        <h1 className='px-6 text-4xl font-bold '>MeLoDies</h1>
-        <div>
+      <div className='bg-[#0E1920] text-white p-10 flex flex-col justify-start items-start w-96 min-h-screen gap-6'>
+        <h1 className='w-full text-4xl font-bold'>MeLoDies</h1>
+        <div className='space-y-4 w-full'>
           {menu.map((status) => (
             <MenuCard key={status.menuId} menu={status} menuData={menuData} />
           ))}
@@ -50,9 +50,9 @@ const MenuCard = ({menu, menuData}) => {
   const groupedMenuData = menuData.filter(item => item.menuId === menu.menuId);
   return (
       <>
-          <div className="m-2 p-2">
-              <h1 className="text-xl text-[#EE10B0]">{menu.menuName}</h1>
-              <div className="text-2xl font-bold pt-2">
+          <div className="w-full">
+              <h1 className="text-xl text-[#EE10B0] mb-2">{menu.menuName}</h1>
+              <div className="text-2xl font-bold space-y-2">
                   {groupedMenuData.map((item) => {
                       const IconComponent = iconMap[item.icon];
                       return (
@@ -67,4 +67,4 @@ const MenuCard = ({menu, menuData}) => {
       </>
   );
 }
-export default Menu;
+export default SideBar;

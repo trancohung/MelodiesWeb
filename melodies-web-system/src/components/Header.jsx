@@ -3,7 +3,7 @@ import { Input } from "antd";
 
 const Header = () => {
     return (
-        <div className="bg-[#412C3A] text-white p-10 flex justify-between items-start h-full">
+        <div className="bg-[#412C3A] text-white p-10 flex justify-between items-center h-full">
             <div className="">
                 <Input
                     placeholder="Search..."
@@ -32,14 +32,14 @@ const Header = () => {
             </div>
             <div className="flex gap-4">
                 <div className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer">
-                    <button>Log In</button>
+                    <button className="cursor-pointer">Log In</button>
                 </div>
                 <div className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer">
-                    <button>Sign Up</button>
+                    <button className="cursor-pointer">Sign Up</button>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Header
+export default Header;

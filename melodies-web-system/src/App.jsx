@@ -1,12 +1,13 @@
 import './App.css'
-import Home from './pages/Home'
+import React from 'react'
+import AppRoutes from './routes/AppRoutes';
 
-function App() {
+const App = () => {
   return (
-    <>
-      <Home />
-    </>
-  )
-}
+    <div className="min-h-screen">
+      <AppRoutes />
+    </div>
+  );
+};
 
-export default App
+export default App;

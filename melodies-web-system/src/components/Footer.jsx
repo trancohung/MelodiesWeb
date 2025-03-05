@@ -1,8 +1,9 @@
 import React from 'react'
+import { FacebookOutlined, InstagramOutlined, TwitterOutlined, PhoneOutlined } from '@ant-design/icons'
 
 const Footer = () => {
     return (
-        <div className='bg-[#412C3A] text-white p-10 flex gap-4'>
+        <div className='bg-[#412C3A] text-white p-10 flex justify-between'>
             <div className='w-2/6'>
                 <h1 className='text-4xl font-bold pb-3'>About</h1>
                 <p>Melodies is a website that has been created for over <span className='text-[#EE10B0]'>5 year’s</span> now
@@ -10,7 +11,7 @@ const Footer = () => {
                     In this website you can listen and download songs for free.
                     Also of you want no limitation you can buy our <span className='text-[#0E9EEF]'>premium pass’s.</span></p>
             </div>
-            <div className='flex gap-8'>
+            <div className='flex gap-4'>
                 <div>
                     <h1 className='font-bold text-4xl pb-3 border-b-2'>Melodies</h1>
                     <div className='text-center text-2xl'>
@@ -40,10 +41,16 @@ const Footer = () => {
                 </div>
             </div>
             <div className=''>
-                melodies
+                <h1 className='font-bold text-4xl pb-24 text-center'>Melodies</h1>
+                <div className='flex justify-center gap-2 text-4xl'>
+                    <FacebookOutlined/>
+                    <InstagramOutlined />
+                    <TwitterOutlined />
+                    <PhoneOutlined />
+                </div>
             </div>
         </div>
     )
 }
 
-export default Footer
+export default Footer;
