@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <div className='bg-[#412C3A] text-white p-10 flex justify-between'>
             <div className='w-2/6'>
-                <h1 className='text-4xl font-bold pb-3'>About</h1>
+                <h1 className='text-2xl font-bold pb-3'>About</h1>
                 <p>Melodies is a website that has been created for over <span className='text-[#EE10B0]'>5 year’s</span> now
                     and it is one of the most famous music player website’s in the world.
                     In this website you can listen and download songs for free.
@@ -13,16 +13,16 @@ const Footer = () => {
             </div>
             <div className='flex gap-4'>
                 <div>
-                    <h1 className='font-bold text-4xl pb-3 border-b-2'>Melodies</h1>
-                    <div className='text-center text-2xl'>
+                    <h1 className='font-bold text-2xl pb-3 border-b-2'>Melodies</h1>
+                    <div className='text-center text-xl'>
                         <p>Songs</p>
                         <p>Radio</p>
                         <p>Podcast</p>
                     </div>
                 </div>
                 <div>
-                    <h1 className='font-bold text-4xl pb-3 border-b-2'>Access</h1>
-                    <div className='text-center text-2xl'>
+                    <h1 className='font-bold text-2xl pb-3 border-b-2'>Access</h1>
+                    <div className='text-center text-xl'>
                         <p>Explore</p>
                         <p>Artists</p>
                         <p>Playlists</p>
@@ -31,8 +31,8 @@ const Footer = () => {
                     </div>
                 </div>
                 <div>
-                    <h1 className='font-bold text-4xl pb-3 border-b-2'>Contact</h1>
-                    <div className='text-center text-2xl'>
+                    <h1 className='font-bold text-2xl pb-3 border-b-2'>Contact</h1>
+                    <div className='text-center text-xl'>
                         <p>About</p>
                         <p>Policy</p>
                         <p>Social Media</p>
@@ -41,8 +41,8 @@ const Footer = () => {
                 </div>
             </div>
             <div className=''>
-                <h1 className='font-bold text-4xl pb-24 text-center'>Melodies</h1>
-                <div className='flex justify-center gap-2 text-4xl'>
+                <h1 className='font-bold text-2xl pb-24 text-center'>Melodies</h1>
+                <div className='flex justify-center gap-2 text-2xl'>
                     <FacebookOutlined/>
                     <InstagramOutlined />
                     <TwitterOutlined />
