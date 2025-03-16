@@ -6,6 +6,7 @@ import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Login from '../pages/Login'
+import PlayList from '../pages/PlayList'
 
 const LayoutWithSidebar = () => (
     <div className="flex">
@@ -30,6 +31,7 @@ const LayoutWithSidebar = () => (
         {/* Routes with Sidebar */}
         <Route element={<LayoutWithSidebar />}>
           <Route path="/" element={<Home />} />
+          <Route path="/playlist" element={<PlayList />} />
         </Route>
       </Routes>
     );
