@@ -5,7 +5,7 @@ import SignUp from '../pages/SignUp'
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import LogIn from '../pages/Login'
+import Login from '../pages/Login'
 
 const LayoutWithSidebar = () => (
     <div className="flex">
@@ -24,7 +24,7 @@ const LayoutWithSidebar = () => (
     return (
       <Routes>
         {/* Routes without Sidebar (Login & Signup) */}
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
   
         {/* Routes with Sidebar */}

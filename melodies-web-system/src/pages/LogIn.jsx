@@ -3,11 +3,12 @@ import { Button, Checkbox, Form, Input, Flex } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
 import { login } from "../utils/auth";
-const LogIn = () => {
+
+const Login = () => {
   const navigate = useNavigate();
 
-  const onFinish = ({ name, password }) => {
-    const user = getUsers();
+  const onFinish = ({ username, password }) => {
+    const user = login(username, password);
     if (user) {
       alert("Login successful!");
       navigate("/");
@@ -137,4 +138,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Login;
