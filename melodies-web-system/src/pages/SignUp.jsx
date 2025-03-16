@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
-
-const getUsers = () => JSON.parse(localStorage.getItem("users")) || [];
-const saveUsers = (users) => localStorage.setItem("users", JSON.stringify(users));
+import { register } from "../utils/auth";
 
 const SignUp = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
     const users = getUsers();
-    const userExists = users.some((user) => user.username === values.username);
+    const userExists = users.some((user) => user.email === values.email);
 
     if (userExists) {
       alert("Username already exists!");
