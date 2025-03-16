@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, Flex } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
 import { login } from "../utils/auth";
-const Login = () => {
+const LogIn = () => {
   const navigate = useNavigate();
 
   const onFinish = ({ name, password }) => {
@@ -137,4 +137,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LogIn;
