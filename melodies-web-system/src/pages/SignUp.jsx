@@ -1,24 +1,25 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Flex } from "antd";
+import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
-import { register } from "../utils/auth";
+import { registerUser } from "../utils/api";
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    const users = getUsers();
-    const userExists = users.some((user) => user.email === values.email);
-
-    if (userExists) {
-      alert("Username already exists!");
+  const onFinish = async (values) => {
+    setLoading(true);
+    const {name, email, password} = values;
+    const response = await registerUser(name, email, password);
+    if (!response.success) {
+      alert(response.message);
+      message.error(response.message);
     } else {
-      users.push(values);
-      localStorage.setItem("users", JSON.stringify(users));
-      console.log("Register successful: ", values);
+      message.success("Login successful");
       navigate("/login");
     }
+    setLoading(false);
   };
   return (
     <div className="bg-[#412C3A] min-h-screen flex flex-col justify-center items-center gap-16 p-8">
@@ -110,6 +111,7 @@ const SignUp = () => {
             type="primary"
             htmlType="submit"
             size="large"
+            loading={loading}
             style={{
               backgroundColor: "#EE10B0",
               border: "none",

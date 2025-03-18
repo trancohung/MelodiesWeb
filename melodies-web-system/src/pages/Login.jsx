@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Flex } from "antd";
+import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
-import { login } from "../utils/auth";
+import { loginUser } from "../utils/api";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onFinish = ({ username, password }) => {
-    const user = login(username, password);
+  const onFinish = async (values) => {
+    setLoading(true);
+    const {email, password} = values;
+    const user = await loginUser(email, password);
     if (user) {
-      alert("Login successful!");
+      message.success("Login successful!");
       navigate("/");
     } else {
-      alert("Invalid username or password");
+      message.error("Invalid username or password");
     }
+    setLoading(false);
   };
 
   return (
@@ -110,6 +114,7 @@ const Login = () => {
             type="primary"
             htmlType="submit"
             size="large"
+            loading={loading}
             style={{
               backgroundColor: "#EE10B0",
               border: "none",
