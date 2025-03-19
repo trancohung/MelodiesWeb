@@ -7,10 +7,13 @@ export const MusicProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  
   const audioRef = useRef(new Audio());
 
   useEffect(() => {
     const audio = audioRef.current;
+    audio.volume = volume;
 
     if (currentSong) {
       audio.src = currentSong.src;
@@ -36,6 +39,10 @@ export const MusicProvider = ({ children }) => {
     }
   }, [currentSong])
 
+  useEffect(() => {
+    audioRef.current.volume = volume;
+  }, [volume])
+
   const playSong = (song) => {
     if (currentSong?.id === song.id) {
       if (isPlaying) {
@@ -55,7 +62,7 @@ export const MusicProvider = ({ children }) => {
   }
 
   return (
-    <MusicContext.Provider value={{ currentSong, isPlaying, playSong, currentTime, duration, seek }}>
+    <MusicContext.Provider value={{ currentSong, isPlaying, playSong, currentTime, duration, seek, volume, setVolume }}>
       {children}
     </MusicContext.Provider>
   );

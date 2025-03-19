@@ -6,7 +6,7 @@ import { MusicProvider } from "./context/MusicProvider";
 const App = () => {
   return (
     <MusicProvider>
-        <AppRoutes />
+      <AppRoutes />
     </MusicProvider>
   );
 };

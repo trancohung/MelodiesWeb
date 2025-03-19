@@ -4,6 +4,8 @@ import {
   PauseCircleOutlined,
   StepBackwardOutlined,
   StepForwardOutlined,
+  SoundOutlined,
+  MutedOutlined,
 } from "@ant-design/icons";
 import { useMusic } from "../context/MusicProvider";
 
@@ -15,17 +17,29 @@ const formatTime = (time) => {
 };
 
 const NowPlayingBar = () => {
-  const { currentSong, isPlaying, playSong, currentTime, duration, seek } =
-    useMusic();
+  const {
+    currentSong,
+    isPlaying,
+    playSong,
+    currentTime,
+    duration,
+    seek,
+    volume,
+    setVolume,
+  } = useMusic();
 
   const handleSeek = (e) => {
     seek(e.target.value);
   };
 
+  const handleVolume = (e) => {
+    setVolume(e.target.value);
+  };
+
   if (!currentSong) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-[#0E1920] text-white p-4 flex items-center justify-between">
+    <div className="fixed bottom-0 left-0 w-full bg-black text-white p-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <img
           src={currentSong.cover}
@@ -39,9 +53,7 @@ const NowPlayingBar = () => {
       </div>
 
       <div className="w-2/3 flex items-center gap-2 mt-2">
-        <span className="text-xs text-gray-400">
-          {formatTime(currentTime)}
-        </span>
+        <span className="text-xs text-gray-400">{formatTime(currentTime)}</span>
         <input
           type="range"
           min="0"
@@ -50,21 +62,72 @@ const NowPlayingBar = () => {
           onChange={handleSeek}
           style={{
             width: "100%",
+            accentColor: "#EE10B0",
           }}
         />
         <span className="text-xs text-gray-400">{formatTime(duration)}</span>
       </div>
-
       <div className="flex items-center gap-4 text-3xl">
-        <StepBackwardOutlined className="cursor-pointer hover:text-gray-400" />
+        <StepBackwardOutlined
+          className="cursor-pointer"
+          style={{
+            color: "#EE10B0",
+          }}
+        />
         <button onClick={() => playSong(currentSong)}>
           {isPlaying ? (
-            <PauseCircleOutlined className="cursor-pointer hover:text-gray-400" />
+            <PauseCircleOutlined
+              className="cursor-pointer"
+              style={{
+                color: "#EE10B0",
+              }}
+            />
           ) : (
-            <PlayCircleOutlined className="cursor-pointer hover:text-gray-400" />
+            <PlayCircleOutlined
+              className="cursor-pointer"
+              style={{
+                color: "#EE10B0",
+              }}
+            />
           )}
         </button>
-        <StepForwardOutlined className="cursor-pointer hover:text-gray-400" />
+        <StepForwardOutlined
+          className="cursor-pointer"
+          style={{
+            color: "#EE10B0",
+          }}
+        />
+      </div>
+
+      <div className="flex items-center gap-4">
+        <button onClick={() => setVolume(volume === 0 ? 1 : 0)}>
+          {volume > 0 ? (
+            <SoundOutlined
+              className="cursor-pointer"
+              style={{
+                color: "#EE10B0",
+              }}
+            />
+          ) : (
+            <MutedOutlined
+              className="cursor-pointer"
+              style={{
+                color: "#EE10B0",
+              }}
+            />
+          )}
+        </button>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={volume}
+          onChange={handleVolume}
+          style={{
+            accentColor: "#EE10B0",
+          }}
+        />
       </div>
     </div>
   );
