@@ -1,12 +1,13 @@
-import './App.css'
-import React from 'react'
-import AppRoutes from './routes/AppRoutes';
+import "./App.css";
+import React from "react";
+import AppRoutes from "./routes/AppRoutes";
+import { MusicProvider } from "./context/MusicProvider";
 
 const App = () => {
   return (
-    <div className="min-h-screen">
-      <AppRoutes />
-    </div>
+    <MusicProvider>
+        <AppRoutes />
+    </MusicProvider>
   );
 };
 

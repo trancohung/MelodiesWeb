@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../pages/Login";
 import PlayList from "../pages/PlayList";
+import NowPlayingBar from "../components/NowPlayingBar";
 
 const LayoutWithSidebar = () => (
   <div className="flex">
@@ -17,6 +18,7 @@ const LayoutWithSidebar = () => (
         <Outlet />
       </div>
       <Footer />
+      <NowPlayingBar />
     </div>
   </div>
 );

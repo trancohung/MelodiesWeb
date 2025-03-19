@@ -33,7 +33,7 @@ const SideBar = () => {
   return (
     <>
       <div className='bg-[#0E1920] text-white p-10 flex flex-col justify-start items-start w-96 min-h-screen gap-6'>
-        <h1 className='w-full text-4xl font-bold'>MeLoDies</h1>
+        <h1 className='w-full text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#EE10B0] to-[#0E9EEFEB] to-70%'>MeLoDies</h1>
         <div className='space-y-4 w-full'>
           {menu.map((status) => (
             <MenuCard key={status.menuId} menu={status} menuData={menuData} />

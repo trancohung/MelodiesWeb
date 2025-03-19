@@ -1,8 +1,8 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { Link, useNavigate } from "react-router";
-import { logout } from "../utils/auth";
 import { useEffect, useState } from "react";
+import { logout } from "../utils/api";
 
 const Header = () => {
   const [user, setUser] = useState(null);
