@@ -6,6 +6,7 @@ import {
   StepForwardOutlined,
   SoundOutlined,
   MutedOutlined,
+  RetweetOutlined,
 } from "@ant-design/icons";
 import { useMusic } from "../context/MusicProvider";
 
@@ -26,6 +27,10 @@ const NowPlayingBar = () => {
     seek,
     volume,
     setVolume,
+    playNextSong,
+    playPreviousSong,
+    isRepeating,
+    toggleRepeat
   } = useMusic();
 
   const handleSeek = (e) => {
@@ -52,8 +57,10 @@ const NowPlayingBar = () => {
         </div>
       </div>
 
-      <div className="w-2/3 flex items-center gap-2 mt-2">
-        <span className="text-xs text-gray-400">{formatTime(currentTime)}</span>
+      <div className="w-3/5 flex items-center gap-2 ">
+        <span className="text-xs text-[#EE10B0]">
+          {formatTime(currentTime)}
+        </span>
         <input
           type="range"
           min="0"
@@ -65,11 +72,20 @@ const NowPlayingBar = () => {
             accentColor: "#EE10B0",
           }}
         />
-        <span className="text-xs text-gray-400">{formatTime(duration)}</span>
+        <span className="text-xs text-[#EE10B0]">{formatTime(duration)}</span>
+      </div>
+      <div className="text-3xl">
+        <button
+          className={isRepeating ? "text-[#EE10B0]" : "text-white"}
+          onClick={() => toggleRepeat()}
+        >
+          <RetweetOutlined />
+        </button>
       </div>
       <div className="flex items-center gap-4 text-3xl">
         <StepBackwardOutlined
           className="cursor-pointer"
+          onClick={playPreviousSong}
           style={{
             color: "#EE10B0",
           }}
@@ -93,6 +109,7 @@ const NowPlayingBar = () => {
         </button>
         <StepForwardOutlined
           className="cursor-pointer"
+          onClick={playNextSong}
           style={{
             color: "#EE10B0",
           }}

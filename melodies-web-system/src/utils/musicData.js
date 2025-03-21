@@ -26,5 +26,19 @@ export const musicList = [
         artist: "Pink Sweat$",
         src: "/music/at-my-worst.mp3",
         cover: "https://i.ytimg.com/vi/bJZmeIQ9L8A/maxresdefault.jpg",
-    }
+    },
+    {
+        id: 5,
+        title: "Tầng Thượng 102",
+        artist: "Cá Hồi Hoang",
+        src: "/music/TangThuong102.mp4",
+        cover: "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/covers/f/d/fdedde94b72e56d1eca324fee31fa28a_1510221982.jpg",
+    },
+    {
+        id: 6,
+        title: "5AM",
+        artist: "Cá Hồi Hoang",
+        src: "/music/5AM.m4a",
+        cover: "https://i.ytimg.com/vi/dd7nhkYdXHI/maxresdefault.jpg",
+    },
 ]
