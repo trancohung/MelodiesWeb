@@ -15,9 +15,10 @@ export const MusicProvider = ({ children }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
-  const [isRepeating, setIsRepeating] = useState(false);
+  const [previousVolume, setPreviousVolume] = useState(0.5);
 
   const audioRef = useRef(new Audio());
+  const isRepeatingRef = useRef(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -31,7 +32,7 @@ export const MusicProvider = ({ children }) => {
     }
 
     const handleSongEnd = () => {
-      if (isRepeating) {
+      if (isRepeatingRef.current) {
         audio.currentTime = 0;
         audio.play();
       } else {
@@ -56,26 +57,41 @@ export const MusicProvider = ({ children }) => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleSongEnd);
     };
-  }, [isRepeating, currentSong]);
+  }, [currentSong]);
 
   useEffect(() => {
     audioRef.current.volume = volume;
   }, [volume]);
 
   const toggleRepeat = () => {
-    setIsRepeating((prev) => !prev)
-  }
+    isRepeatingRef.current = !isRepeatingRef.current;
+  };
+
+  const toggleMute = () => {
+    if (volume > 0) {
+      setPreviousVolume(volume);
+      setVolume(0);
+    } else {
+      setVolume(previousVolume);
+    }
+  };
+
+  const togglePlay = () => {
+    if (!currentSong) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   const playSong = (song) => {
     if (currentSong?.id === song.id) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+      togglePlay();
     } else {
       setCurrentSong(song);
+      setIsPlaying(true);
     }
   };
 
@@ -110,16 +126,18 @@ export const MusicProvider = ({ children }) => {
       value={{
         currentSong,
         isPlaying,
+        togglePlay,
         playSong,
         currentTime,
         duration,
         seek,
         volume,
         setVolume,
+        toggleMute,
         playNextSong,
         playPreviousSong,
-        isRepeating,
-        toggleRepeat
+        isRepeating: isRepeatingRef.current,
+        toggleRepeat,
       }}
     >
       {children}

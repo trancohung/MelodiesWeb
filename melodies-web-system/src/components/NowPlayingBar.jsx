@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   PlayCircleOutlined,
   PauseCircleOutlined,
@@ -21,17 +21,20 @@ const NowPlayingBar = () => {
   const {
     currentSong,
     isPlaying,
-    playSong,
+    togglePlay,
     currentTime,
     duration,
     seek,
     volume,
     setVolume,
+    toggleMute,
     playNextSong,
     playPreviousSong,
     isRepeating,
-    toggleRepeat
+    toggleRepeat,
   } = useMusic();
+
+  const [repeatUI, setRepeatUI] = useState(isRepeating);
 
   const handleSeek = (e) => {
     seek(e.target.value);
@@ -39,6 +42,11 @@ const NowPlayingBar = () => {
 
   const handleVolume = (e) => {
     setVolume(e.target.value);
+  };
+
+  const handleToggleRepeat = () => {
+    toggleRepeat();
+    setRepeatUI(!repeatUI);
   };
 
   if (!currentSong) return null;
@@ -77,7 +85,7 @@ const NowPlayingBar = () => {
       <div className="text-3xl">
         <button
           className={isRepeating ? "text-[#EE10B0]" : "text-white"}
-          onClick={() => toggleRepeat()}
+          onClick={handleToggleRepeat}
         >
           <RetweetOutlined />
         </button>
@@ -90,7 +98,7 @@ const NowPlayingBar = () => {
             color: "#EE10B0",
           }}
         />
-        <button onClick={() => playSong(currentSong)}>
+        <button onClick={togglePlay}>
           {isPlaying ? (
             <PauseCircleOutlined
               className="cursor-pointer"
@@ -117,7 +125,7 @@ const NowPlayingBar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <button onClick={() => setVolume(volume === 0 ? 1 : 0)}>
+        <button onClick={toggleMute}>
           {volume > 0 ? (
             <SoundOutlined
               className="cursor-pointer"
