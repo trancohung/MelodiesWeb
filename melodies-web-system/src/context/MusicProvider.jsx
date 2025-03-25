@@ -16,6 +16,7 @@ export const MusicProvider = ({ children }) => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [previousVolume, setPreviousVolume] = useState(0.5);
+  const [speed, setSpeed] = useState(1);
 
   const audioRef = useRef(new Audio());
   const isRepeatingRef = useRef(false);
@@ -63,6 +64,10 @@ export const MusicProvider = ({ children }) => {
     audioRef.current.volume = volume;
   }, [volume]);
 
+  useEffect(() => {
+    audioRef.current.playbackRate = speed;
+  }, [speed]);
+
   const toggleRepeat = () => {
     isRepeatingRef.current = !isRepeatingRef.current;
   };
@@ -108,6 +113,7 @@ export const MusicProvider = ({ children }) => {
     );
     const nextIndex = (currentIndex + 1) % musicList.length;
     setCurrentSong(musicList[nextIndex]);
+    setSpeed(1);
   };
 
   const playPreviousSong = () => {
@@ -119,7 +125,12 @@ export const MusicProvider = ({ children }) => {
     const previousIndex =
       (currentIndex - 1 + musicList.length) % musicList.length;
     setCurrentSong(musicList[previousIndex]);
+    setSpeed(1);
   };
+
+  const changeSpeed = (newSpeed) => {
+    setSpeed(newSpeed);
+  }
 
   return (
     <MusicContext.Provider
@@ -138,6 +149,8 @@ export const MusicProvider = ({ children }) => {
         playPreviousSong,
         isRepeating: isRepeatingRef.current,
         toggleRepeat,
+        speed,
+        changeSpeed,
       }}
     >
       {children}

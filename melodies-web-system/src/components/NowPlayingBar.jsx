@@ -32,6 +32,8 @@ const NowPlayingBar = () => {
     playPreviousSong,
     isRepeating,
     toggleRepeat,
+    speed,
+    changeSpeed,
   } = useMusic();
 
   const [repeatUI, setRepeatUI] = useState(isRepeating);
@@ -49,6 +51,10 @@ const NowPlayingBar = () => {
     setRepeatUI(!repeatUI);
   };
 
+  const handleChangeSpeed = (e) => {
+    changeSpeed(e.target.value);
+  }
+
   if (!currentSong) return null;
 
   return (
@@ -65,7 +71,7 @@ const NowPlayingBar = () => {
         </div>
       </div>
 
-      <div className="w-3/5 flex items-center gap-2 ">
+      <div className="w-1/2 flex items-center gap-2 ">
         <span className="text-xs text-[#EE10B0]">
           {formatTime(currentTime)}
         </span>
@@ -89,6 +95,20 @@ const NowPlayingBar = () => {
         >
           <RetweetOutlined />
         </button>
+      </div>
+      <div className="text-[#EE10B0]">
+        <label>Tốc độ:</label>
+        <select
+          value={speed}
+          onChange={handleChangeSpeed}
+          className="bg-black"
+        >
+          <option value="0.5">0.5x</option>
+          <option value="1">1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
       </div>
       <div className="flex items-center gap-4 text-3xl">
         <StepBackwardOutlined
