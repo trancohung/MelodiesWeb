@@ -1,23 +1,10 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { Link, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
-import { logout } from "../utils/api";
+import { Link } from "react-router";
+import { useAuth } from "../context/AuthProvider";
 
 const Header = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem("userLogin"));
-    setUser(loggedInUser);
-  }, []);
-
-  const handleLogout = () => {
-    logout();
-    setUser(null);
-    navigate("/login");
-  };
+  const { user, logout } = useAuth();
 
   return (
     <div className="bg-[#412C3A] text-white p-10 flex justify-between items-center h-full">
@@ -58,7 +45,7 @@ const Header = () => {
         <div className="flex gap-4 items-center">
           <span>{user.name}!</span>
           <button
-            onClick={handleLogout}
+            onClick={logout}
             className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer"
           >
             Log Out

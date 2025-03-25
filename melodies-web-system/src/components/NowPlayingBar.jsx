@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PlayCircleOutlined,
   PauseCircleOutlined,
@@ -53,7 +53,13 @@ const NowPlayingBar = () => {
 
   const handleChangeSpeed = (e) => {
     changeSpeed(e.target.value);
-  }
+  };
+
+  useEffect(() => {
+    return () => {
+      togglePlay(false);
+    };
+  }, []);
 
   if (!currentSong) return null;
 
@@ -97,11 +103,10 @@ const NowPlayingBar = () => {
         </button>
       </div>
       <div className="text-[#EE10B0]">
-        <label>Tốc độ:</label>
         <select
           value={speed}
           onChange={handleChangeSpeed}
-          className="bg-black"
+          className="bg-black appearance-none outline-none text-center"
         >
           <option value="0.5">0.5x</option>
           <option value="1">1x</option>

@@ -3,15 +3,17 @@ import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
 import { registerUser } from "../utils/api";
+import { useAuth } from "../context/AuthProvider";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
     setLoading(true);
-    const {name, email, password} = values;
-    const response = await registerUser(name, email, password);
+    const { name, email, password } = values;
+    const response = await register(name, email, password);
     if (!response.success) {
       alert(response.message);
       message.error(response.message);

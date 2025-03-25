@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router";
-import { loginUser } from "../utils/api";
+import { useAuth } from "../context/AuthProvider";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const onFinish = async (values) => {
     setLoading(true);
-    const {email, password} = values;
-    const user = await loginUser(email, password);
-    if (user) {
+    const { email, password } = values;
+    const response = await login(email, password);
+    if (response.success) {
       message.success("Login successful!");
       navigate("/");
     } else {
-      message.error("Invalid username or password");
+      message.error(response.message || "Invalid username or password");
     }
     setLoading(false);
   };

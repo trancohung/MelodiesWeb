@@ -130,7 +130,7 @@ export const MusicProvider = ({ children }) => {
 
   const changeSpeed = (newSpeed) => {
     setSpeed(newSpeed);
-  }
+  };
 
   return (
     <MusicContext.Provider

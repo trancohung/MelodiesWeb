@@ -15,7 +15,7 @@ const FeaturedSongs = () => {
         {musicList.map((song) => (
           <div
             key={song.id}
-            className="bg-[#1F1F1F] w-full p-4 rounded-lg cursor-pointer hover:bg-gray-900 transition"
+            className="bg-[#1F1F1F] w-full h-100 p-4 rounded-lg cursor-pointer hover:bg-gray-900 transition"
           >
             <img
               src={song.cover}

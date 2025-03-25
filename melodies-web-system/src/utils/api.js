@@ -70,4 +70,4 @@ export const loginUser = async (email, password) => {
 
 export const getUserLogin = () => JSON.parse(localStorage.getItem("userLogin"));
 
-export const logout = () => localStorage.removeItem("userLogin");
+export const logoutUser = () => localStorage.removeItem("userLogin");

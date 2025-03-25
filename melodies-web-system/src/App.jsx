@@ -2,12 +2,15 @@ import "./App.css";
 import React from "react";
 import AppRoutes from "./routes/AppRoutes";
 import { MusicProvider } from "./context/MusicProvider";
+import { AuthProvider } from "./context/AuthProvider";
 
 const App = () => {
   return (
-    <MusicProvider>
-      <AppRoutes />
-    </MusicProvider>
+    <AuthProvider>
+      <MusicProvider>
+        <AppRoutes />
+      </MusicProvider>
+    </AuthProvider>
   );
 };
 
