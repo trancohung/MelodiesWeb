@@ -1,6 +1,6 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
 const Header = () => {
@@ -16,7 +16,6 @@ const Header = () => {
             backgroundColor: "lightgray",
             padding: "10px",
             width: "400px",
-            borderRadius: "5px",
             outline: "none",
             boxShadow: "none",
             borderRadius: "10px",

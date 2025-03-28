@@ -106,7 +106,7 @@ const NowPlayingBar = () => {
         <select
           value={speed}
           onChange={handleChangeSpeed}
-          className="bg-black appearance-none outline-none text-center"
+          className="bg-black appearance-none outline-none p-2"
         >
           <option value="0.5">0.5x</option>
           <option value="1">1x</option>

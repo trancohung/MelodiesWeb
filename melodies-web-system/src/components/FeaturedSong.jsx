@@ -15,6 +15,7 @@ const FeaturedSongs = () => {
         {musicList.map((song) => (
           <div
             key={song.id}
+            onClick={() => playSong(song)}
             className="bg-[#1F1F1F] w-full h-100 p-4 rounded-lg cursor-pointer hover:bg-gray-900 transition"
           >
             <img
@@ -27,7 +28,7 @@ const FeaturedSongs = () => {
                 <h3 className="text-lg font-semibold">{song.title}</h3>
                 <p className="text-gray-400 text-sm">{song.artist}</p>
               </div>
-              <button onClick={() => playSong(song)}>
+              <button>
                 {currentSong?.id === song.id && isPlaying ? (
                   <PauseCircleOutlined
                     style={{
