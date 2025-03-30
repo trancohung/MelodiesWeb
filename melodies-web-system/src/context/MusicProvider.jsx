@@ -32,6 +32,12 @@ export const MusicProvider = ({ children }) => {
       setIsPlaying(true);
     }
 
+    if (!currentSong) {
+      audioRef.pause();
+      audioRef.currentTime = 0;
+      setIsPlaying(false);
+    }
+
     const handleSongEnd = () => {
       if (isRepeatingRef.current) {
         audio.currentTime = 0;

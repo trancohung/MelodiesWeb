@@ -19,9 +19,8 @@ const Header = () => {
     if (value.trim()) {
       setFilteredSong(
         musicList.filter((song) => {
-          return song.title.toLowerCase().includes(value.toLowerCase() ||
-              song.artist.toLowerCase().includes(value.toLowerCase())
-          );
+          return song.title.toLowerCase().startsWith(value.toLowerCase()) ||
+              song.artist.toLowerCase().startsWith(value.toLowerCase())
         })
       );
     } else {
@@ -94,7 +93,7 @@ const Header = () => {
       </div>
       {user ? (
         <div className="flex gap-4 items-center">
-          <span>{user.name}!</span>
+          <span>{user.name}</span>
           <button
             onClick={logout}
             className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer"
