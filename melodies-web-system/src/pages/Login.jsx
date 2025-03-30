@@ -45,7 +45,7 @@ const Login = () => {
             {
               required: true,
               type: "email",
-              message: "Please input your Email!",
+              message: "Please type your Email!",
             },
           ]}
         >
@@ -66,7 +66,7 @@ const Login = () => {
 
         <Form.Item
           name="password"
-          rules={[{ required: true, message: "Please input your Password!" }]}
+          rules={[{ required: true, message: "Please type your Password!" }]}
         >
           <Input.Password
             placeholder="Password"
