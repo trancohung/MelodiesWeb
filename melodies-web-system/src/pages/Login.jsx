@@ -4,7 +4,7 @@ import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
-const Login = () => {
+const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -144,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LogIn;
