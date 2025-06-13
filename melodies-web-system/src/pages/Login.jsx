@@ -1,25 +1,46 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import logo from "../assets/logo-no-background.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+import { loginValidation } from "../utils/validations/loginValidation";
 
 const LogIn = () => {
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    remember: false,
+  });
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({});
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
-  const onFinish = async (values) => {
-    setLoading(true);
-    const { email, password } = values;
-    const response = await login(email, password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const validationErrors = loginValidation(form);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) {
+      setIsLoading(false);
+      return;
+    }
+    const { username, password } = form;
+    const response = await login(username, password);
     if (response.success) {
-      message.success("Login successful!");
+      setMessage("Login successful!");
       navigate("/");
     } else {
-      message.error(response.message || "Invalid username or password");
+      setMessage(response.message || "Invalid username or password");
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -29,117 +50,78 @@ const LogIn = () => {
         <h1 className="text-white text-5xl font-bold">Melodies</h1>
       </div>
 
-      <Form
-        name="login"
-        initialValues={{ remember: true }}
-        className="w-full max-w-xl"
-        onFinish={onFinish}
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-xl text-white space-y-4"
       >
-        <h2 className="text-white text-3xl mb-6 text-center font-bold">
+        <h2 className="text-3xl mb-6 text-center font-bold">
           Login to continue
         </h2>
 
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              type: "email",
-              message: "Please type your Email!",
-            },
-          ]}
-        >
-          <Input
-            placeholder="Email"
-            size="large"
-            style={{
-              backgroundColor: "#612C4F",
-              padding: "1rem",
-              color: "#FFFFFF",
-              border: "none",
-              borderRadius: "10px",
-              outline: "none",
-            }}
-            className="!placeholder-[#FFFFFF99]"
+        <div>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={form.username}
+            onChange={handleChange}
+            className="w-full p-4 rounded-lg bg-[#612C4F] placeholder-[#FFFFFF99] text-white border-none outline-none"
           />
-        </Form.Item>
+          {errors.username && (
+            <p className="text-red-400 text-sm mt-1">{errors.username}</p>
+          )}
+        </div>
 
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: "Please type your Password!" }]}
-        >
-          <Input.Password
+        <div>
+          <input
+            type="password"
+            name="password"
             placeholder="Password"
-            size="large"
-            style={{
-              backgroundColor: "#612C4F",
-              padding: "1rem",
-              color: "#FFFFFF",
-              border: "none",
-              borderRadius: "10px",
-              outline: "none",
-            }}
-            className="[&>input::placeholder]:!text-[#FFFFFF99] [&_.anticon]:!text-[#FFFFFF] [&_.anticon:hover]:!text-[#EE10B0]"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full p-4 rounded-lg bg-[#612C4F] placeholder-[#FFFFFF99] text-white border-none outline-none"
           />
-        </Form.Item>
+          {errors.password && (
+            <p className="text-red-400 text-sm mt-1">{errors.password}</p>
+          )}
+        </div>
 
-        <Form.Item>
-          <Flex justify="space-between" align="center" className="mb-4">
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox
-                style={{
-                  color: "#FFFFFF99",
-                }}
-                className="[&_.ant-checkbox-checked_.ant-checkbox-inner]:!bg-[#EE10B0] 
-                                        [&_.ant-checkbox-checked_.ant-checkbox-inner]:!border-[#EE10B0]
-                                        hover:[&_.ant-checkbox-inner]:!border-[#EE10B0]"
-              >
-                Remember me
-              </Checkbox>
-            </Form.Item>
-            <a
-              href="#"
-              style={{
-                color: "#FFFFFF99",
-              }}
-              className="hover:!text-[#EE10B0]"
-            >
-              Forgot password?
-            </a>
-          </Flex>
-        </Form.Item>
+        {message && <p className="text-red-400 text-center">{message}</p>}
 
-        <Form.Item>
-          <Button
-            block
-            type="primary"
-            htmlType="submit"
-            size="large"
-            loading={loading}
-            style={{
-              backgroundColor: "#EE10B0",
-              border: "none",
-              outline: "none",
-              padding: "2rem",
-            }}
-            className="hover:!bg-[#C00E90]"
+        <div className="flex justify-between items-center">
+          <label className="text-[#FFFFFF99]">
+            <input
+              type="checkbox"
+              name="remember"
+              checked={form.remember}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            Remember me
+          </label>
+          <a href="#" className="text-[#FFFFFF99] hover:text-[#EE10B0]">
+            Forgot password?
+          </a>
+        </div>
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-[#EE10B0] hover:bg-[#C00E90] text-white font-bold py-4 rounded-lg"
+        >
+          {isLoading ? "Logging in..." : "Log in"}
+        </button>
+
+        <p className="text-center text-white mt-4">
+          or{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="text-[#EE10B0] cursor-pointer hover:underline"
           >
-            Log in
-          </Button>
-          <p className="text-center text-white mt-4">
-            or{" "}
-            <a
-              onClick={() => navigate("/signup")}
-              style={{
-                color: "#EE10B0",
-              }}
-              className="hover:!underline"
-            >
-              Register now!
-            </a>
-          </p>
-        </Form.Item>
-      </Form>
+            Register now!
+          </span>
+        </p>
+      </form>
     </div>
   );
 };

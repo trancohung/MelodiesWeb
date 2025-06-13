@@ -1,13 +1,13 @@
 import React from "react";
 import Home from "../pages/Home";
 import { Route, Routes, Outlet } from "react-router-dom";
-import SignUp from "../pages/SignUp";
 import SideBar from "../components/SideBar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../pages/Login";
 import PlayList from "../pages/PlayList";
 import NowPlayingBar from "../components/NowPlayingBar";
+import Register from "../pages/Register";
 
 const LayoutWithSidebar = () => (
   <div className="flex">
@@ -28,7 +28,7 @@ const AppRoutes = () => {
     <Routes>
       {/* Routes without Sidebar (Login & Signup) */}
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/register" element={<Register />} />
 
       {/* Routes with Sidebar */}
       <Route element={<LayoutWithSidebar />}>

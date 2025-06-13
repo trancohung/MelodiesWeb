@@ -19,14 +19,16 @@ const Header = () => {
     if (value.trim()) {
       setFilteredSong(
         musicList.filter((song) => {
-          return song.title.toLowerCase().startsWith(value.toLowerCase()) ||
-              song.artist.toLowerCase().startsWith(value.toLowerCase())
+          return (
+            song.title.toLowerCase().startsWith(value.toLowerCase()) ||
+            song.artist.toLowerCase().startsWith(value.toLowerCase())
+          );
         })
       );
     } else {
       setFilteredSong([]);
     }
-  }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,7 +36,7 @@ const Header = () => {
         setSearchTerm("");
         setFilteredSong([]);
       }
-    }
+    };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -60,8 +62,16 @@ const Header = () => {
           <div className="absolute w-full bg-[#1F1F1F] border border-gray-700 rounded-lg shadow-lg max-h-64 overflow-y-auto z-10">
             {filteredSong.length > 0 ? (
               filteredSong.map((song) => (
-                <div key={song.id} onClick={() => playSong(song)} className="p-2 cursor-pointer hover:bg-gray-900 transition flex items-center">
-                  <img src={song.cover} alt={song.title} className="w-10 h-10 rounded-md mr-3"/>
+                <div
+                  key={song.id}
+                  onClick={() => playSong(song)}
+                  className="p-2 cursor-pointer hover:bg-gray-900 transition flex items-center"
+                >
+                  <img
+                    src={song.cover}
+                    alt={song.title}
+                    className="w-10 h-10 rounded-md mr-3"
+                  />
                   <div>
                     <h3 className="text-sm font-semibold">{song.title}</h3>
                     <p className="text-xs text-gray-400">{song.artist}</p>
@@ -111,10 +121,10 @@ const Header = () => {
               <button className="cursor-pointer">Log In</button>
             </Link>
             <Link
-              to={"/signup"}
+              to={"/register"}
               className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer"
             >
-              <button className="cursor-pointer">Sign Up</button>
+              <button className="cursor-pointer">Register</button>
             </Link>
           </div>
         </div>

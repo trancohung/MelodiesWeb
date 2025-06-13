@@ -1,73 +1,41 @@
-const API_URL = "https://mindx-mockup-server.vercel.app/api/resources";
-const API_KEY = "67d9539146d8721a9e76872a";
+import axios from "axios";
 
-const headers = {
-  "Content-Type": "application/json",
+const API = axios.create({
+  baseURL: "http://localhost:8082/api/v1",
+});
+
+const saveUserToLocalStorage = (user) => {
+  localStorage.setItem("x-access-token", user.accessToken);
 };
 
-export const registerUser = async (name, email, password) => {
+export const registerUser = async (username, email, password) => {
   try {
-    const responseUsers = await fetch(`${API_URL}/users?apiKey=${API_KEY}`, {
-      headers,
-    });
-    if (!responseUsers.ok) {
-      return { success: false, message: "Failed to fetch users" };
-    }
-
-    const dataUsers = await responseUsers.json();
-    const users = dataUsers.data?.data || [];
-
-    const existingUser = users.find((u) => u.email === email);
-    if (existingUser) {
-      return { success: false, message: "Email already exists" };
-    }
-
-    const response = await fetch(`${API_URL}/users?apiKey=${API_KEY}`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ name, email, password }),
-    });
-
-    if (!response.ok) {
-      return { success: false, message: "Network problem" };
-    }
-
-    const data = await response.json();
-    return { success: true, data: data.data };
+    const res = await API.post("/auth/register", { username, email, password });
+    return { success: true };
   } catch (err) {
-    return { success: false, message: err.message };
+    return {
+      success: false,
+      message: err.response?.data?.message || "Lỗi đăng ký",
+    };
   }
 };
 
-export const loginUser = async (email, password) => {
+export const loginUser = async (username, password) => {
   try {
-    const response = await fetch(`${API_URL}/users?apiKey=${API_KEY}`, {
-      headers,
-    });
+    const res = await API.post("/auth/login", { username, password });
+    const { user } = res.data;
 
-    if (!response.ok) {
-      return { success: false, message: "Failed to fetch users" };
-    }
+    saveUserToLocalStorage(user);
 
-    const data = await response.json();
-    const users = data.data?.data || [];
-
-    const user = users.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (!user) {
-      return { success: false, message: "Incorrect email or password" };
-    }
-
-    localStorage.setItem("userLogin", JSON.stringify(user));
-    return { success: true, data: user };
-  } catch (error) {
-    console.error("Login Error: ", error);
-    return { success: false, message: error.message };
+    return { success: true };
+  } catch (err) {
+    return {
+      success: false,
+      message: err.response?.data?.message || "Lỗi đăng nhập",
+    };
   }
 };
 
-export const getUserLogin = () => JSON.parse(localStorage.getItem("userLogin"));
+export const getUserLogin = () => localStorage.getItem("x-access-token");
 
-export const logoutUser = () => localStorage.removeItem("userLogin");
+export const logoutUser = () => localStorage.removeItem("x-access-token");
