@@ -12,7 +12,8 @@ export const musicList = [
     title: "Creep",
     artist: "Radiohead",
     src: "/music/creep.m4a",
-    cover: "https://i.ytimg.com/vi/l5t9IXtTr6g/maxresdefault.jpg",
+    cover:
+      "https://i.pinimg.com/736x/c8/03/41/c803414de1c3004fbacfaebc4a1bd4d4.jpg",
   },
   {
     id: 3,
