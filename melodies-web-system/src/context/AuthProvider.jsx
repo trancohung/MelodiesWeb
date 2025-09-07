@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
-  getUserLogin,
+  getMe,
   loginUser,
   logoutUser,
   registerUser,
-} from "../utils/api";
+} from "../services/auth.js";
 
 const AuthContext = createContext();
 
@@ -12,18 +12,33 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loggedInUser = getUserLogin();
-    if (loggedInUser) {
-      setUser(loggedInUser);
-    }
+    const initUser = async () => {
+      try {
+        const userData = await getMe();
+        setUser(userData);
+      } catch (error) {
+        setUser(null);
+      }
+    };
+    const token = localStorage.getItem("x-access-token");
+    if (token) initUser();
   }, []);
 
-  const login = async (username, password) => {
-    const response = await loginUser(username, password);
-    if (response.success) {
-      setUser(response.data);
+  const login = async (email, password) => {
+    try {
+      const res = await loginUser({ email, password });
+      console.log("Login result:", res);
+      if (res.success && res.user?.token) {
+        const { token, ...userData } = res.user;
+        setUser(userData);
+        return { success: true, data: userData };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        message: error.response?.data?.message || "Login failed",
+      };
     }
-    return response;
   };
 
   const register = async (username, email, password) => {

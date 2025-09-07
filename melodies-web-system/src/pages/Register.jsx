@@ -39,18 +39,21 @@ const Register = () => {
       setIsLoading(false);
       return;
     }
+    try {
+      const { username, email, password } = form;
+      const response = await register(username, email, password);
 
-    const { username, email, password } = form;
-    const response = await register(username, email, password);
-
-    if (response.success) {
-      message.success("Register successful!");
-      navigate("/login");
-    } else {
-      message.error(response.message || "Registration failed.");
+      if (response.success) {
+        message.success("Register successful!");
+        navigate("/login");
+      } else {
+        message.error(response.message || "Registration failed.");
+      }
+    } catch (error) {
+      message.error("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (

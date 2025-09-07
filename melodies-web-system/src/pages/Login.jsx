@@ -9,7 +9,7 @@ const LogIn = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
     remember: false,
   });
@@ -26,21 +26,27 @@ const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setMessage("");
     const validationErrors = loginValidation(form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) {
       setIsLoading(false);
       return;
     }
-    const { username, password } = form;
-    const response = await login(username, password);
-    if (response.success) {
-      setMessage("Login successful!");
-      navigate("/");
-    } else {
-      setMessage(response.message || "Invalid username or password");
+    try {
+      const { email, password } = form;
+      const response = await login(email, password);
+      if (response.success) {
+        setMessage("Login successful!");
+        navigate("/");
+      } else {
+        setMessage(response.message || "Invalid email or password");
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -60,15 +66,15 @@ const LogIn = () => {
 
         <div>
           <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={form.username}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
             onChange={handleChange}
             className="w-full p-4 rounded-lg bg-[#612C4F] placeholder-[#FFFFFF99] text-white border-none outline-none"
           />
-          {errors.username && (
-            <p className="text-red-400 text-sm mt-1">{errors.username}</p>
+          {errors.email && (
+            <p className="text-red-400 text-sm mt-1">{errors.email}</p>
           )}
         </div>
 
@@ -107,7 +113,7 @@ const LogIn = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-[#EE10B0] hover:bg-[#C00E90] text-white font-bold py-4 rounded-lg"
+          className="w-full bg-[#EE10B0] hover:bg-[#C00E90] text-white font-bold py-4 rounded-lg cursor-pointer"
         >
           {isLoading ? "Logging in..." : "Log in"}
         </button>
