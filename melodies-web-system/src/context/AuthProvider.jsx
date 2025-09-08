@@ -28,10 +28,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await loginUser({ email, password });
       console.log("Login result:", res);
-      if (res.success && res.user?.token) {
+      if (res.success && res.user) {
+        localStorage.setItem("x-access-token", res.user.token);
         const { token, ...userData } = res.user;
         setUser(userData);
         return { success: true, data: userData };
+      } else {
+        return { success: false, message: res.message || "Login failed" };
       }
     } catch (error) {
       return {

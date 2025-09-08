@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import PlayList from "../pages/PlayList";
 import NowPlayingBar from "../components/NowPlayingBar";
 import Register from "../pages/Register";
+import SongPage from "../pages/SongPage";
 
 const LayoutWithSidebar = () => (
   <div className="flex">
@@ -33,7 +34,7 @@ const AppRoutes = () => {
       {/* Routes with Sidebar */}
       <Route element={<LayoutWithSidebar />}>
         <Route path="/" element={<Home />} />
-        <Route path="/playlist" element={<PlayList />} />
+        <Route path="/songs" element={<SongPage />} />
       </Route>
     </Routes>
   );
