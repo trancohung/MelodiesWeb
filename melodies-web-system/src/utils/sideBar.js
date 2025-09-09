@@ -47,7 +47,7 @@ export const menuData = [
     menuName: "Artists",
     icon: "UserOutlined",
     menuId: 1,
-    path: "artists",
+    path: "/artists",
   },
   {
     menuDataId: 5,
@@ -96,5 +96,12 @@ export const menuData = [
     menuName: "LogOut",
     icon: "LogoutOutlined",
     menuId: 4,
+  },
+  {
+    menuDataId: 12,
+    menuName: "Songs",
+    icon: "FolderAddOutlined",
+    menuId: 3,
+    path: "/songs",
   },
 ];

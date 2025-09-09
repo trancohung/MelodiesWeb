@@ -103,7 +103,9 @@ const Header = () => {
       </div>
       {user ? (
         <div className="flex gap-4 items-center">
-          <span>{user.name}</span>
+          <span className="bg-[#F6339A] text-[#FFFFFF] p-4 rounded-full uppercase">
+            {user.username}
+          </span>
           <button
             onClick={logout}
             className="bg-[#1E1E1E] text-[#EE10B0] p-4 rounded-2xl cursor-pointer"

@@ -15,7 +15,6 @@ export const registerUser = async (data) => {
 export const loginUser = async (data) => {
   try {
     const res = await api.post("/auth/login", data);
-    console.log("Login response:", res.data);
     if (res.data.success && res.data.user?.token) {
       localStorage.setItem("x-access-token", res.data.user.token);
       const { token, ...userData } = res.data.user;
@@ -32,7 +31,7 @@ export const loginUser = async (data) => {
 
 export const getMe = async () => {
   const res = await api.get("/auth/me");
-  return res.data;
+  return res.data.user;
 };
 
 export const logoutUser = () => {

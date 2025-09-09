@@ -1,13 +1,23 @@
 import api from "./api.js";
 
 export const getSongs = async () => {
-  const res = await api.get("/songs");
-  return res.data;
+  try {
+    const res = await api.get("/songs");
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching songs: ", error);
+    return [];
+  }
 };
 
 export const getSongById = async (id) => {
-  const res = await api.get(`/songs/${id}`);
-  return res.data;
+  try {
+    const res = await api.get(`/songs/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching song by id: ", error);
+    return [];
+  }
 };
 
 export const uploadSong = async (data) => {

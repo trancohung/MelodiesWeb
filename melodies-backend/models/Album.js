@@ -10,6 +10,7 @@ const albumSchema = new mongoose.Schema(
     },
     coverUrl: { type: String },
     songs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
+    releaseDate: { type: Date },
   },
   { timestamps: true }
 );

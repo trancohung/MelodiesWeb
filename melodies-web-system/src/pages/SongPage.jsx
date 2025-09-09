@@ -3,14 +3,10 @@ import { useSongs } from "../context/SongProvider";
 import SongCard from "../components/SongCard";
 
 const SongPage = () => {
-  const { songs, isLoading, fetchSongs, addSong } = useSongs();
+  const { songs, isLoading, addSong } = useSongs();
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [uploading, setUploading] = useState(false);
-
-  useEffect(() => {
-    fetchSongs();
-  }, []);
 
   const handleUpload = async (e) => {
     e.preventDefault();

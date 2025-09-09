@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { getSongs, uploadSong } from "../services/song";
@@ -38,6 +38,9 @@ export const SongProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchSongs();
+  }, []);
   return (
     <SongContext.Provider value={{ songs, isLoading, fetchSongs, addSong }}>
       {children}

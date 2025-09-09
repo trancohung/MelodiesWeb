@@ -110,7 +110,6 @@ const Register = () => {
           className="w-full p-4 rounded-lg bg-[#612C4F] placeholder-[#FFFFFF99] text-white border-none outline-none"
         />
         {errors.password && <p className="text-red-400">{errors.password}</p>}
-
         <button
           type="submit"
           disabled={isLoading}
