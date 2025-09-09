@@ -1,6 +1,6 @@
 import albumService from "../services/albumService";
 
-const albumController =  {
+const albumController = {
   createAlbum: async (req, res) => {
     try {
       const { title, coverUrl, releaseDate } = req.body;
@@ -19,5 +19,5 @@ const albumController =  {
         .status(500)
         .json({ message: "Internal server error", success: false });
     }
-  };
+  },
 };
